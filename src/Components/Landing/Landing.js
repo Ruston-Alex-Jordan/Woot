@@ -6,7 +6,7 @@ class Landing extends Component {
         return (
             <div>
                 <Header />
-                Landing
+                Landing testing testing testing
             </div>
         );
     }
