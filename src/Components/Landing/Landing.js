@@ -34,7 +34,7 @@ class Landing extends Component {
         //the number below will be changed to variable hour when database is filled
         let product = this.props.hourlyProduct[hour];
         if(!product){
-            return <img src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
+            return <img alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
         }
         // console.log(this.state.timeUp)
         return (
@@ -62,7 +62,6 @@ class Landing extends Component {
                                     timeFormat={'hms'}
                                 />
                             </div>
-
                         </div>
                     </div>
                     <div className='product-image-container'>

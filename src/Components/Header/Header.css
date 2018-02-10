@@ -47,9 +47,15 @@ table {
     height: 16vh;
 }
 
-/* .upper-header{
-	padding-left: 
-} */
+.upper-header{
+	height: 20px;
+	width: 100%;
+	padding-left: 10vw;
+	padding-top: 8px;
+}
+.upper-header-image{
+	height: 55px;
+}
 
 hr {
     display: block;
@@ -59,7 +65,7 @@ hr {
 	border-top: 1px solid #ccc;
 	opacity: 0.5;
 	margin-bottom: 1em;
-	margin-top: 2.5em;
+	margin-top: 2.0em;
     padding: 0;
 }
 

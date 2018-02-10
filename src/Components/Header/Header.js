@@ -7,7 +7,8 @@ class Header extends Component {
             <div className='header-container'>
 
                 <div className='upper-header'>
-                    Test
+                    <img alt='monkey' className='upper-header-image' src='https://d3gqasl9vmjfd8.cloudfront.net/6bbd3a85-d3e5-486a-9b94-3596fe0d369a.png' />
+                    <img alt='woot' className='upper-header-image' src='https://d3gqasl9vmjfd8.cloudfront.net/3d71f841-6152-4ddf-a91c-e8235a0af010.png' />
                 </div>
 
                 <hr />

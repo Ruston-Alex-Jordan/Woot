@@ -48,24 +48,29 @@ table {
 
 .todays-woot{
 	padding-left: 8vw;
-	padding-top: 4vh;
+	padding-top: 6vh;
+	font-size: 32px;
+	font-family: Karla;
 }
 
 .product-container{
 	display: flex;
+	font-family: Karla;
+	padding-left: 8vw;
+	padding-top: 4vh;
+	padding-bottom: 4vh;
 }
 
-.product-container{
-	padding-left: 8vw;
-	padding-top: 8vh;
+.product-info-container{
+	width: 32vw;
 }
 
 .product-info{
-	padding-top: 8px;
+	padding-top: 16px;
 }
 
 .countdown-clock{
-	padding-top: 8px;
+	padding-top: 16px;
 }
 
 .add-to-cart-button {
@@ -103,10 +108,6 @@ table {
 	top:1px;
 }    
 
-.product-info-container{
-	width: 32vw;
-}
-
 .product-image-container{
 	margin-left: 6vw;
 	margin-right: 10vw;
@@ -117,4 +118,10 @@ table {
 	height: 40vh;
 	width: auto;
 	padding: 24px;
+}
+
+.product-image:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
 }
