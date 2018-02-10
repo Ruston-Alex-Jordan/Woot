@@ -46,3 +46,53 @@ table {
     background-image: url('https://d3gqasl9vmjfd8.cloudfront.net/a041e198-e433-46e3-806e-fc29d3a51603.png');
     height: 16vh;
 }
+
+/* .upper-header{
+	padding-left: 
+} */
+
+hr {
+    display: block;
+    height: 1px;
+    width: 80%;
+    border: 0;
+	border-top: 1px solid #ccc;
+	opacity: 0.5;
+	margin-bottom: 1em;
+	margin-top: 2.5em;
+    padding: 0;
+}
+
+.navbar {
+	/* padding-top: 80px; */
+	z-index: 100;
+	font-family: karla;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    width: 100%; /* Full width */
+    display: flex;
+    justify-content: space-around;
+    opacity: 1;
+    transition: opacity 0.5s;
+    animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1};
+
+}
+/* Links inside the navbar */
+.navbar a {
+    color: #ffffff;
+    text-align: center;
+    /* padding-top: 14px;
+    padding-bottom: 14px; */
+    padding-left: 5px;
+    text-decoration: none;
+    font-family: karla;
+    font-size: 18px;
+
+    transition: background .25s ease-in-out;
+    -moz-transition: background .25s ease-in-out;
+    -webkit-transition: background .25s ease-in-out;
+    
+}
+.navbar a:hover {
+    color: lightgrey;
+}
