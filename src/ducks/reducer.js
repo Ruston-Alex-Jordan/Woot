@@ -7,8 +7,6 @@ let initialState = {
 }
 
 export function getHourlyProduct(){
-    console.log('lololol')
-
     let test = axios.get('http://localhost:8000/products')
     
     return {
@@ -19,12 +17,10 @@ export function getHourlyProduct(){
 function reducer(state = initialState , action){
     switch(action.type){
         case LOGIN + '_FULFILLED':
-        console.log(action)
-         return Object.assign({}, state, {hourlyProduct: action.payload.data});
-
+            return Object.assign({}, state, {hourlyProduct: action.payload.data});
+        default:
+            return state;
     }
-    return state;
-
 }
 
 export default reducer
