@@ -1,5 +1,6 @@
 .footer-container{
     display: flex;
+    border-top: 1px solid lightgrey;
 }
 
 .footer-woot-container{
