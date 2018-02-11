@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import store from './store.js';
 
 import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
 import Landing from './Components/Landing/Landing';
 import Cart from './Components/Cart/Cart';
 
@@ -20,6 +21,7 @@ ReactDOM.render(
                     <Route path='/' exact component={Landing} />
                     <Route path='/cart' component={Cart} />
                 </Switch>
+                <Footer />
             </div>
         </Provider>
     </BrowserRouter>

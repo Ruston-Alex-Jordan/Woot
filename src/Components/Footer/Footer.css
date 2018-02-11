@@ -1,0 +1,15 @@
+.footer-container{
+    display: flex;
+}
+
+.footer-woot-container{
+    padding: 2em;
+}
+
+.footer-community-container{
+    padding: 2em;
+}
+
+.footer-blog-container{
+    padding: 2em;
+}

@@ -73,8 +73,8 @@ class Landing extends Component {
                     </div>
                 </div>
 
-                <div>
-                    Test Advertisement
+                <div className='advertisements'>
+                    Advertisement
                 </div>
 
             </div>
