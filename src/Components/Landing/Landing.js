@@ -14,10 +14,16 @@ class Landing extends Component {
         this.state = {
             timeUp: false
         }
+        this.addToCart = this.addToCart.bind(this);
     }
 
     componentWillMount(){
         this.props.getHourlyProduct()
+    }
+
+    addToCart(){
+        console.log('cat');
+        window.location.href="/cart";
     }
     
     render() { 
@@ -30,8 +36,6 @@ class Landing extends Component {
 
         let secondsRemaining = ((60 - minute) * 60) + (60 - second);
         // console.log(secondsRemaining)
-
-        //the number below will be changed to variable hour when database is filled
         let product = this.props.hourlyProduct[hour];
         if(!product){
             return <img alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
@@ -49,7 +53,7 @@ class Landing extends Component {
                         <h2 className='product-info'>MSRP: ${product.fullprice}.00</h2>
                         <h2 className='product-info'>Our Price: ${product.saleprice}.00</h2>
                         <p className='product-info'>Description: {product.description}</p>
-                        <button className='add-to-cart-button'>I want it!</button>
+                        <button onClick={this.addToCart} className='add-to-cart-button'>I want it!</button>
 
                         <p className='product-info'>Remaining: {product.quantity}</p>
                         <div className='product-info'>
