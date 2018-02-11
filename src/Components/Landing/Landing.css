@@ -42,9 +42,9 @@ table {
 	border-spacing: 0;
 }
 
-* {
+/* * {
 	border: 1px solid red !important;
-  }
+  } */
 
 .todays-woot{
 	padding-left: 8vw;
