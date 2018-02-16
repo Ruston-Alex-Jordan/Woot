@@ -30,9 +30,9 @@ class Cart extends Component {
             <div className='main-container-cart'>
                 <div className='content-left-cart'>
                     <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length == 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
-                    {cartItems}
+                    <div className='cart-item'>{cartItems}</div>
                 </div>
-                <div hidden={!this.props.cart.length}>
+                <div className='cart-countdown-timer' hidden={!this.props.cart.length}>
                     Time remaining to make purchase
                     <ReactCountdownClock seconds={getTimeRemaining()}
                         color="#000"
