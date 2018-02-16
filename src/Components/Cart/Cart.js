@@ -14,7 +14,8 @@ class Cart extends Component {
             <div>
                 <div> {e.productname}  </div>
                 <div>PRICE: ${e.saleprice} </div>
-                <div> SOLD ON WOOT </div>
+                <div> SOLD ON WOOT  </div>
+                
             </div>
 
             )
