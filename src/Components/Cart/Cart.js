@@ -1,33 +1,45 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactCountdownClock from 'react-countdown-clock';
+
+import {getTimeRemaining} from '../../Util/Util';
 
 import './Cart.css';
 
 class Cart extends Component {
-
+    // getTimeRemaining(){
+    //     console.log('test')
+    // }
 
     render() {
+        console.log(this.props)
         let cartItems = this.props.cart.map( e => {
             console.log(e)
             return (
-            <div>
+            <div key={e.productid}>
                 <div> {e.productname}  </div>
-                <div>PRICE: ${e.saleprice} </div>
+                <div>Price: ${e.saleprice} </div>
                 <div> SOLD ON WOOT  </div>
                 
             </div>
 
             )
-        })
+        });
         return (
             <div className='main-container-cart'>
                 <div className='content-left-cart'>
                     <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length == 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
                     {cartItems}
-
-                    
-
+                </div>
+                <div hidden={!this.props.cart.length}>
+                    Time remaining to make purchase
+                    <ReactCountdownClock seconds={getTimeRemaining()}
+                        color="#000"
+                        alpha={0.9}
+                        size={100}
+                        timeFormat={'hms'}
+                    />
                 </div>
                 <div className='content-right-cart'>
 

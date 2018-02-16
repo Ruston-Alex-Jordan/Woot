@@ -6,6 +6,7 @@ import { getHourlyProduct, addToCart} from '../.././ducks/reducer';
 import ReactCountdownClock from 'react-countdown-clock';
 import { Link } from 'react-router-dom';
 
+import {getTimeRemaining} from '../../Util/Util';
 import './Landing.css';
 
 class Landing extends Component {
@@ -21,16 +22,8 @@ class Landing extends Component {
     }
 
     render() { 
-
-        let date = new Date();
-        let hour = date.getHours();
-        let minute = date.getMinutes();
-        let second = date.getSeconds();
-        // console.log(minute, second)
-
-        let secondsRemaining = ((60 - minute) * 60) + (60 - second);
-        // console.log(secondsRemaining)
-        let product = this.props.hourlyProduct[hour];
+        // console.log(this.props)
+        let product = this.props.hourlyProduct[new Date().getHours()];
         if(!product){
             return <img alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
         }
@@ -47,13 +40,26 @@ class Landing extends Component {
                         <h2 className='product-info'>MSRP: ${product.fullprice}.00</h2>
                         <h2 className='product-info'>Our Price: ${product.saleprice}.00</h2>
                         <p className='product-info'>Description: {product.description}</p>
-                        <Link to='/cart'><button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>I want it!</button></Link>
+                        <div hidden={this.props.cart.length}>
+                            <Link to='/cart'>
+                                <button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>
+                                    I want it!
+                                </button>
+                            </Link>
+                        </div>
+
+                        <div hidden={!this.props.cart.length}>
+                            <button disabled={true} className='add-to-cart-button-disabled'>
+                                Limit 1 Per Customer
+                            </button>
+                        </div>
+
 
                         <p className='product-info'>Remaining: {product.quantity}</p>
                         <div className='product-info'>
                             <p>Time Remaining: </p>
                             <div className='countdown-clock'>
-                                <ReactCountdownClock seconds={secondsRemaining}
+                                <ReactCountdownClock seconds={getTimeRemaining()}
                                     color="#000"
                                     alpha={0.9}
                                     size={100}
@@ -79,7 +85,8 @@ class Landing extends Component {
 function mapStateToProps(state){
     // console.log(state)
     return {
-        hourlyProduct: state.hourlyProduct
+        hourlyProduct: state.hourlyProduct,
+        cart: state.cart
     }
 }
 

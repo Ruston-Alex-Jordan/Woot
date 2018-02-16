@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const LOGIN = 'LOGIN';
 const ADD_TO_CART = 'ADD_TO_CART';
@@ -10,15 +10,17 @@ let initialState = {
 }
 
 export function getHourlyProduct(){
-    let test = axios.get('http://localhost:8000/products')
+    let getAllProducts = axios.get('http://localhost:8000/products')
     
     return {
         type: LOGIN,
-        payload: test
+        payload: getAllProducts
     }
 }
 
 export function addToCart(id){
+
+
     return {
         type: ADD_TO_CART,
         payload: id
