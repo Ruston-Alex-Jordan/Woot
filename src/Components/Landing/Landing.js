@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import axios from 'axios';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { getHourlyProduct} from '../.././ducks/reducer';
+import { getHourlyProduct, addToCart} from '../.././ducks/reducer';
 import ReactCountdownClock from 'react-countdown-clock';
 
 
@@ -14,18 +14,12 @@ class Landing extends Component {
         this.state = {
             timeUp: false
         }
-        this.addToCart = this.addToCart.bind(this);
     }
 
     componentWillMount(){
         this.props.getHourlyProduct()
     }
 
-    addToCart(){
-        console.log('cat');
-        window.location.href="/cart";
-    }
-    
     render() { 
 
         let date = new Date();
@@ -53,7 +47,7 @@ class Landing extends Component {
                         <h2 className='product-info'>MSRP: ${product.fullprice}.00</h2>
                         <h2 className='product-info'>Our Price: ${product.saleprice}.00</h2>
                         <p className='product-info'>Description: {product.description}</p>
-                        <button onClick={this.addToCart} className='add-to-cart-button'>I want it!</button>
+                        <button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>I want it!</button>
 
                         <p className='product-info'>Remaining: {product.quantity}</p>
                         <div className='product-info'>
@@ -90,7 +84,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps( dispatch ) {
-    return bindActionCreators({ getHourlyProduct }, dispatch )
+    return bindActionCreators({ getHourlyProduct, addToCart}, dispatch )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Landing);
