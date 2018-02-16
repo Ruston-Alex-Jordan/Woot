@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { getHourlyProduct, addToCart} from '../.././ducks/reducer';
 import ReactCountdownClock from 'react-countdown-clock';
-
+import { Link } from 'react-router-dom';
 
 import './Landing.css';
 
@@ -47,7 +47,7 @@ class Landing extends Component {
                         <h2 className='product-info'>MSRP: ${product.fullprice}.00</h2>
                         <h2 className='product-info'>Our Price: ${product.saleprice}.00</h2>
                         <p className='product-info'>Description: {product.description}</p>
-                        <button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>I want it!</button>
+                        <Link to='/cart'><button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>I want it!</button></Link>
 
                         <p className='product-info'>Remaining: {product.quantity}</p>
                         <div className='product-info'>
