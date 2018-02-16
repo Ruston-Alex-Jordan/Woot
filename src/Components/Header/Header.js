@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css'
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom'
 
 class Header extends Component {
     render() {
@@ -14,10 +16,11 @@ class Header extends Component {
                 <hr />
 
                 <div className="navbar">
-                    <a href="/">Test</a>
-                    <a href="/">Test</a>
-                    <a href="/">Test</a>
-                    <a href="/">Test</a>
+                <Link to='/'> <h1>Test</h1> </Link>
+                <Link to='/'> <h1>Test</h1> </Link>
+                <Link to='/'> <h1>Test</h1> </Link>
+                <Link to='/'> <h1>Test</h1> </Link>
+                <Link to='/cart'> <h1> Cart: {this.props.cart.length} </h1> </Link>
                 </div>
 
             </div>
@@ -25,4 +28,11 @@ class Header extends Component {
     }
 }
 
-export default Header;
+function mapStateToProps(state){
+    console.log(state)
+    return {
+        cart: state.cart
+    }
+}
+
+export default connect(mapStateToProps )(Header);
