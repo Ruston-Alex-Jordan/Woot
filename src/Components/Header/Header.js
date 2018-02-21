@@ -29,7 +29,6 @@ class Header extends Component {
 }
 
 function mapStateToProps(state){
-    console.log(state)
     return {
         cart: state.cart
     }

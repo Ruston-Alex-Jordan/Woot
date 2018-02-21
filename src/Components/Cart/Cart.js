@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import ReactCountdownClock from 'react-countdown-clock';
 
 import {getTimeRemaining} from '../../Util/Util';
+import {bindActionCreators} from 'redux';
+import {checkoutCart} from '../.././ducks/reducer'
 
 import './Cart.css';
 
@@ -13,7 +15,6 @@ class Cart extends Component {
     // }
 
     render() {
-        console.log(this.props)
         let cartItems = this.props.cart.map( e => {
             console.log(e)
             return (
@@ -21,6 +22,7 @@ class Cart extends Component {
                 <div> {e.productname}  </div>
                 <div>Price: ${e.saleprice} </div>
                 <div> SOLD ON WOOT  </div>
+                <button onClick={() => this.props.checkoutCart(this.props.cart)}> CHECKOUT </button> 
                 
             </div>
 
@@ -29,7 +31,7 @@ class Cart extends Component {
         return (
             <div className='main-container-cart'>
                 <div className='content-left-cart'>
-                    <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length == 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
+                    <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length === 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
                     <div className='cart-item'>{cartItems}</div>
                 </div>
                 <div className='cart-countdown-timer' hidden={!this.props.cart.length}>
@@ -56,4 +58,9 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(Cart);
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators({ checkoutCart }, dispatch )
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

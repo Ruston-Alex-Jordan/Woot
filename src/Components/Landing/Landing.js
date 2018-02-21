@@ -28,6 +28,8 @@ class Landing extends Component {
             return <img alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
         }
         // console.log(this.state.timeUp)
+        
+        console.log(this.props.cart)
         return (
             <div>
                 <div className='todays-woot'>Todays Woot</div>
