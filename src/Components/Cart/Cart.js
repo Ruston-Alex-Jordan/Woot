@@ -5,26 +5,41 @@ import ReactCountdownClock from 'react-countdown-clock';
 import StripeCheckout from 'react-stripe-checkout';
 import {getTimeRemaining} from '../../Util/Util';
 import {bindActionCreators} from 'redux';
-import {checkoutCart} from '../.././ducks/reducer'
+import {checkoutCart} from '../.././ducks/reducer';
+import axios from 'axios'
 
 import './Cart.css';
 
 class Cart extends Component {
+    constructor(props){
+        super(props)
+
+    this.onToken = this.onToken.bind(this)
+    }
+
+    onToken(token){
+        let config ={
+            token: token,
+            cart: this.props.cart
+        }
+        this.props.checkoutCart(this.props.cart);
+        axios.post('http://localhost8000/order-complete', config).then( res => {
+        })
+    }
     render() {
+        let totalCart
         let cartItems = this.props.cart.map( e => {
             console.log(e)
             return (
             <div key={e.productid}>
                 <div> {e.productname}  </div>
                 <div>Price: ${e.saleprice} </div>
-                <div> SOLD ON WOOT  </div>
-                
+                <div> SOLD ON WOOT  </div>   
             </div>
 
             )
         });
 
-        let totalCart
         if(this.props.cart.length > 1){ 
             totalCart = this.props.cart.map( (e, i, arry) => {
             return e.saleprice + arry[i + 1].saleprice
@@ -37,11 +52,11 @@ class Cart extends Component {
                 <div className='content-left-cart'>
                     <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length === 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
                     <div className='cart-item'>{cartItems}</div>
-                <div onClick={() => this.props.checkoutCart(this.props.cart)}><StripeCheckout
-                    token={token}
+                <StripeCheckout
+                    token={this.onToken}
                     stripeKey="pk_test_iK0PyzokdY1afxWvhlU5qnOA"
                     amount={totalCart * 100}
-                /></div>
+                />
                 </div>
                 <div className='cart-countdown-timer' hidden={!this.props.cart.length}>
                     Time remaining to make purchase
@@ -68,7 +83,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps( dispatch ) {
-    return bindActionCreators({ checkoutCart }, dispatch )
+    return bindActionCreators({ checkoutCart}, dispatch )
 }
 
 
