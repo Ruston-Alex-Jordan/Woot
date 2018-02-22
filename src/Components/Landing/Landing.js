@@ -49,9 +49,9 @@ class Landing extends Component {
                                 </button>
                             </Link>
                         </div>
-
-                        <div hidden={!this.props.cart.length}>
-                            <button disabled={true} className='add-to-cart-button-disabled'>
+                        {/* hidden={!this.props.cart.length} */}
+                        <div >
+                            <button disabled={false} className='add-to-cart-button-disabled'>
                                 Limit 1 Per Customer
                             </button>
                         </div>
