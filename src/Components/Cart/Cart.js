@@ -23,7 +23,7 @@ class Cart extends Component {
             cart: this.props.cart
         }
         this.props.checkoutCart(this.props.cart);
-        axios.post('http://localhost8000/order-complete', config).then( res => {
+        axios.post('http://localhost:8000/order-complete', config).then( res => {
         })
     }
     render() {
@@ -54,8 +54,13 @@ class Cart extends Component {
                     <div className='cart-item'>{cartItems}</div>
                 <StripeCheckout
                     token={this.onToken}
+                    currency="USD"
                     stripeKey="pk_test_iK0PyzokdY1afxWvhlU5qnOA"
                     amount={totalCart * 100}
+                    name="Woot Store"
+                    email=''
+                    shippingAddress
+                    zipCode={true}
                 />
                 </div>
                 <div className='cart-countdown-timer' hidden={!this.props.cart.length}>
