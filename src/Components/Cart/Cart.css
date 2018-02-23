@@ -14,7 +14,7 @@
 }
 
 .content-right-cart{
-	height: 90vh;
+	height: 40vh;
 	width: 25%;
 	border: 1px solid black;
 	margin-top: 2%;
@@ -70,8 +70,8 @@
 }
 
 .stripe-checkout {
-	margin-top: 24px;
-	margin-left: 24px;
+	padding-left: 30px;
+	padding-top: 8px;
 }
 
 .cart-items-container{
@@ -82,14 +82,17 @@
 }
 
 .cart-countdown-timer-container {
-	padding: 30px;
+	padding-left: 30px;
+	padding-top: 30px;
 }
 
 .cart-countdown-timer {
 	padding-top: 24px;
 }
 
-
+.right-content-subtotal {
+	padding-top: 24px;
+}
 
 
 

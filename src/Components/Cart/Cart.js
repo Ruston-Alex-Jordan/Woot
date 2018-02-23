@@ -56,44 +56,50 @@ class Cart extends Component {
          } else if(!this.props.cart) { console.log('i am empty')} 
 
         return (
-            <div className='main-container-cart'>
+            <div>
+                <div className='main-container-cart'>
 
-                <div className='content-left-cart'>
-                    <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length === 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
-                    <div>{cartItems}</div>
+                    <div className='content-left-cart'>
+                        <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length === 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
+                        <div>{cartItems}</div>
 
-                </div>
+                    </div>
 
 
 
-                <div className='content-right-cart'>
-                    <div className='cart-countdown-timer-container' hidden={!this.props.cart.length}>
-                        <div>Time remaining to make purchase</div>
-                        <div className='cart-countdown-timer'>
-                            <ReactCountdownClock seconds={getTimeRemaining()}
-                                color="#000"
-                                alpha={0.9}
-                                size={100}
-                                timeFormat={'hms'}
+                    <div className='content-right-cart'>
+                        <div className='cart-countdown-timer-container' hidden={!this.props.cart.length}>
+                            <div>Time remaining to make purchase</div>
+                            <div className='cart-countdown-timer'>
+                                <ReactCountdownClock seconds={getTimeRemaining()}
+                                    color="#000"
+                                    alpha={0.9}
+                                    size={100}
+                                    timeFormat={'hms'}
+                                />
+                            </div>
+                            <div className='right-content-subtotal'>Subtotal: </div>
+                        </div>
+
+                        <div className='stripe-checkout'>
+                            <StripeCheckout
+                                token={this.onToken}
+                                currency="USD"
+                                stripeKey="pk_test_iK0PyzokdY1afxWvhlU5qnOA"
+                                amount={totalCart * 100}
+                                name="Woot Store"
+                                email=''
+                                shippingAddress
+                                zipCode={true}
                             />
                         </div>
-                    </div>
 
-                    <div className='stripe-checkout'>
-                        <StripeCheckout
-                            token={this.onToken}
-                            currency="USD"
-                            stripeKey="pk_test_iK0PyzokdY1afxWvhlU5qnOA"
-                            amount={totalCart * 100}
-                            name="Woot Store"
-                            email=''
-                            shippingAddress
-                            zipCode={true}
-                        />
-                    </div>
-
-                </div>                
-                
+                    </div>                
+                    
+                </div>
+                <div className='advertisements'>
+                    <img src='https://d3gqasl9vmjfd8.cloudfront.net/9431cc33-13b2-4009-a1ef-eeac94dc6d2d.jpg' />
+                </div>
             </div>
         );
     }
