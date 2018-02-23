@@ -25,7 +25,7 @@ class Landing extends Component {
         // console.log(this.props)
         let product = this.props.hourlyProduct[new Date().getHours()];
         if(!product){
-            return <img alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
+            return <img className='loading-image' alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
         }
         // console.log(this.state.timeUp)
         

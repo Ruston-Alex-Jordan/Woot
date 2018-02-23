@@ -46,6 +46,10 @@ table {
 	border: 1px solid red !important;
   } */
 
+.loading-image{
+	margin-left: 30%;
+}
+
 .todays-woot{
 	padding-left: 8vw;
 	padding-top: 6vh;

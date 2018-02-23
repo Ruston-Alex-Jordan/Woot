@@ -27,9 +27,9 @@ class Cart extends Component {
         })
     }
     render() {
-        let totalCart
         let cartItems = this.props.cart.map( e => {
-            console.log(e)
+            // console.log(e)
+            let percentageOff = (1 - (e.saleprice / e.fullprice)) * 100;
             return (
             <div className='cart-item' key={e.productid}>
                 <div>
@@ -37,19 +37,23 @@ class Cart extends Component {
                 </div>
                 <div>
                     <div className='cart-product-name'> {e.productname}  </div>
-                    <div className='cart-product-price'>${e.saleprice}.00 </div>
+                    <div className='cart-price-container'>
+                        <div className='cart-product-price'>${e.saleprice}.00</div>
+                        <div className='cart-product-fullprice'>${e.fullprice}.00 </div>
+                        <div className='cart-product-discount'>{Number(percentageOff).toFixed(2)}% off list price</div>
+                    </div>
+                    <div>Ships in 3-5 business days.</div>
                 </div> 
             </div>
-
             )
         });
-
+        let totalCart;
         if(this.props.cart.length > 1){ 
             totalCart = this.props.cart.map( (e, i, arry) => {
             return e.saleprice + arry[i + 1].saleprice
          }) } else if(this.props.cart.length === 1) {
             totalCart = this.props.cart[0].saleprice
-         } else if(!this.props.cart) { console.log('i am empty bitch')} 
+         } else if(!this.props.cart) { console.log('i am empty')} 
 
         return (
             <div className='main-container-cart'>
@@ -57,6 +61,24 @@ class Cart extends Component {
                 <div className='content-left-cart'>
                     <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length === 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
                     <div>{cartItems}</div>
+
+                </div>
+
+
+
+                <div className='content-right-cart'>
+                    <div className='cart-countdown-timer-container' hidden={!this.props.cart.length}>
+                        <div>Time remaining to make purchase</div>
+                        <div className='cart-countdown-timer'>
+                            <ReactCountdownClock seconds={getTimeRemaining()}
+                                color="#000"
+                                alpha={0.9}
+                                size={100}
+                                timeFormat={'hms'}
+                            />
+                        </div>
+                    </div>
+
                     <div className='stripe-checkout'>
                         <StripeCheckout
                             token={this.onToken}
@@ -69,22 +91,7 @@ class Cart extends Component {
                             zipCode={true}
                         />
                     </div>
-                </div>
 
-                <div className='cart-countdown-timer-container' hidden={!this.props.cart.length}>
-                    Time remaining to make purchase
-                    <div className='cart-countdown-timer'>
-                        <ReactCountdownClock seconds={getTimeRemaining()}
-                            color="#000"
-                            alpha={0.9}
-                            size={100}
-                            timeFormat={'hms'}
-                        />
-                    </div>
-                </div>
-
-                <div className='content-right-cart'>
-                    This is the red box
                 </div>                
                 
             </div>
