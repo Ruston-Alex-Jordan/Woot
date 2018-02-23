@@ -25,7 +25,7 @@ class Landing extends Component {
         // console.log(this.props)
         let product = this.props.hourlyProduct[new Date().getHours()];
         if(!product){
-            return <img alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
+            return <img className='loading-image' alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
         }
         // console.log(this.state.timeUp)
         
@@ -49,8 +49,8 @@ class Landing extends Component {
                                 </button>
                             </Link>
                         </div>
-                        {/* hidden={!this.props.cart.length} */}
-                        <div >
+
+                        <div hidden={!this.props.cart.length}>
                             <button disabled={false} className='add-to-cart-button-disabled'>
                                 Limit 1 Per Customer
                             </button>
@@ -76,7 +76,7 @@ class Landing extends Component {
                 </div>
 
                 <div className='advertisements'>
-                    Advertisement
+                    <img src='https://d3gqasl9vmjfd8.cloudfront.net/9431cc33-13b2-4009-a1ef-eeac94dc6d2d.jpg' />
                 </div>
 
             </div>

@@ -2,34 +2,76 @@
 	height: 100vh;
 	display: flex;
 	justify-content: center;
+	font-family: 'Open Sans';
 }
 
 .content-left-cart{
 	height: 100vh;
 	width: 45%;
-	margin-top: 2%;
+	margin-top: 3%;
 	padding-left: 5%;
+	margin-right: 8vw;
 }
 
 .content-right-cart{
-	height: 90vh;
+	height: 40vh;
 	width: 25%;
-	background-color: red;
+	border: 1px solid black;
 	margin-top: 2%;
+	position: sticky;
+	top: 0;
 }
 
 .shopping-cart-header{
-	font-family: Museo;
+	/* font-family: 'Museo'; */ 
+	/* commenting this out until we finalize all the fonts */
 	font-size: 25px;
 	line-height: 22px;
 	padding-left: 5%;
-	margin-bottom: 2%;
+	margin-bottom: 5%;
 
 }
 
 .cart-item {
-	padding-left: 5%;
-	padding-top: 16px;
+	padding: 16px;
+	border: 1px solid grey;
+	border-radius: 10px;
+	display: flex;
+}
+
+.cart-image {
+	height: 5em;
+	margin-right: 16px;
+	border: 1px solid lightgrey;
+}
+
+.cart-product-name{
+	padding: 8px;
+}
+
+.cart-price-container {
+	display: flex;
+}
+
+.cart-product-price {
+	padding-top: 8px;
+}
+.cart-product-fullprice {
+	padding-top: 8px;
+	padding-left: 8px;
+	color: grey;
+	text-decoration: line-through;
+}
+
+.cart-product-discount {
+	padding-top: 8px;
+	padding-left: 8px;
+	color: grey;
+}
+
+.stripe-checkout {
+	padding-left: 30px;
+	padding-top: 8px;
 }
 
 .cart-items-container{
@@ -39,11 +81,18 @@
 
 }
 
-.cart-countdown-timer {
-	padding: 30px;
+.cart-countdown-timer-container {
+	padding-left: 30px;
+	padding-top: 30px;
 }
 
+.cart-countdown-timer {
+	padding-top: 24px;
+}
 
+.right-content-subtotal {
+	padding-top: 24px;
+}
 
 
 
