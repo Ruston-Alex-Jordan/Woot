@@ -6,7 +6,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import {getTimeRemaining} from '../../Util/Util';
 import {bindActionCreators} from 'redux';
 import {checkoutCart} from '../.././ducks/reducer';
-import axios from 'axios'
+import axios from 'axios';  
 
 import './Cart.css';
 
@@ -31,10 +31,14 @@ class Cart extends Component {
         let cartItems = this.props.cart.map( e => {
             console.log(e)
             return (
-            <div key={e.productid}>
-                <div> {e.productname}  </div>
-                <div>Price: ${e.saleprice} </div>
-                <div> SOLD ON WOOT  </div>   
+            <div className='cart-item' key={e.productid}>
+                <div>
+                    <img className='cart-image' src={e.imgurl} />
+                </div>
+                <div>
+                    <div className='cart-product-name'> {e.productname}  </div>
+                    <div className='cart-product-price'>${e.saleprice}.00 </div>
+                </div> 
             </div>
 
             )
@@ -49,31 +53,38 @@ class Cart extends Component {
 
         return (
             <div className='main-container-cart'>
+
                 <div className='content-left-cart'>
                     <h1 className='shopping-cart-header'> Shopping Cart ({this.props.cart.length === 1 ? this.props.cart.length + ' Item' : this.props.cart.length + ' Items' })</h1>
-                    <div className='cart-item'>{cartItems}</div>
-                <StripeCheckout
-                    token={this.onToken}
-                    currency="USD"
-                    stripeKey="pk_test_iK0PyzokdY1afxWvhlU5qnOA"
-                    amount={totalCart * 100}
-                    name="Woot Store"
-                    email=''
-                    shippingAddress
-                    zipCode={true}
-                />
+                    <div>{cartItems}</div>
+                    <div className='stripe-checkout'>
+                        <StripeCheckout
+                            token={this.onToken}
+                            currency="USD"
+                            stripeKey="pk_test_iK0PyzokdY1afxWvhlU5qnOA"
+                            amount={totalCart * 100}
+                            name="Woot Store"
+                            email=''
+                            shippingAddress
+                            zipCode={true}
+                        />
+                    </div>
                 </div>
-                <div className='cart-countdown-timer' hidden={!this.props.cart.length}>
-                    Time remaining to make purchase
-                    <ReactCountdownClock seconds={getTimeRemaining()}
-                        color="#000"
-                        alpha={0.9}
-                        size={100}
-                        timeFormat={'hms'}
-                    />
-                </div>
-                <div className='content-right-cart'>
 
+                <div className='cart-countdown-timer-container' hidden={!this.props.cart.length}>
+                    Time remaining to make purchase
+                    <div className='cart-countdown-timer'>
+                        <ReactCountdownClock seconds={getTimeRemaining()}
+                            color="#000"
+                            alpha={0.9}
+                            size={100}
+                            timeFormat={'hms'}
+                        />
+                    </div>
+                </div>
+
+                <div className='content-right-cart'>
+                    This is the red box
                 </div>                
                 
             </div>

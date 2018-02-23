@@ -16,11 +16,10 @@ class Header extends Component {
                 <hr />
 
                 <div className="navbar">
-                <Link to='/'> <h1>Test</h1> </Link>
-                <Link to='/'> <h1>Test</h1> </Link>
-                <Link to='/'> <h1>Test</h1> </Link>
-                <Link to='/'> <h1>Test</h1> </Link>
-                <Link to='/cart'> <h1> Cart: {this.props.cart.length} </h1> </Link>
+                    <Link to='/'> <h1>Home</h1> </Link>
+                    <Link to='/'> <h1>Electronics</h1> </Link>
+                    <Link to='/'> <h1>Outdoor</h1> </Link>
+                    <Link to='/cart'> <h1> Cart: {this.props.cart.length} </h1> </Link>
                 </div>
 
             </div>
