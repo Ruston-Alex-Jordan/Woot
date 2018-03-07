@@ -17,8 +17,8 @@ class Header extends Component {
 
                 <div className="navbar">
                     <Link to='/'> <h1>Home</h1> </Link>
-                    <Link to='/'> <h1>Electronics</h1> </Link>
-                    <Link to='/'> <h1>Outdoor</h1> </Link>
+                    <Link to='/electronics'> <h1>Electronics</h1> </Link>
+                    <Link to='/outdoor'> <h1>Outdoor</h1> </Link>
                     <Link to='/cart'> <h1> Cart: {this.props.cart.length} </h1> </Link>
                 </div>
 

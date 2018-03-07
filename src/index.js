@@ -8,6 +8,8 @@ import store from './store.js';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Landing from './Components/Landing/Landing';
+import Electronics from './Components/Electronics/Electronics';
+import Outdoor from './Components/Outdoor/Outdoor';
 import Cart from './Components/Cart/Cart';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -20,6 +22,8 @@ ReactDOM.render(
                 <Switch>
                     <Route path='/' exact component={Landing} />
                     <Route path='/cart' component={Cart} />
+                    <Route path='/electronics' component={Electronics} />
+                    <Route path='/outdoor' component={Outdoor} />
                 </Switch>
                 <Footer />
             </div>
