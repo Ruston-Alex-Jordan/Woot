@@ -81,7 +81,7 @@ class Cart extends Component {
                             <div className='right-content-subtotal'>Subtotal: </div>
                         </div>
 
-                        <div className='stripe-checkout'>
+                        <div hidden={!this.props.cart.length} className='stripe-checkout'>
                             <StripeCheckout
                                 token={this.onToken}
                                 currency="USD"
