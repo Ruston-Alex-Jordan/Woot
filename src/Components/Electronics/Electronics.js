@@ -12,7 +12,7 @@ class Electronics extends Component {
         super();
         this.state = {
             timeUp: false,
-            alreadyInCart: false
+
         }
     }
 
@@ -20,25 +20,7 @@ class Electronics extends Component {
         this.props.getHourlyElectronicsProduct()
     }
 
-    componentDidMount(){
-        let product = this.props.hourlyElectronicsProduct[new Date().getHours()];
-        this.props.cart.map( e => {
-            if(!product){
-                return;
-            } else if(e.productname == product.productname){
-                this.setState({
-                    alreadyInCart: true
-                }) 
-            } else {
-                this.setState({
-                    alreadyInCart: false
-                })
-
-            }
-        })
-    }
     render() {
-        console.log(this.props.hourlyElectronicsProduct, 'laksdjfdas')
 
     let product = this.props.hourlyElectronicsProduct[new Date().getHours()];
     if(!product){
@@ -57,7 +39,7 @@ class Electronics extends Component {
                     <h2 className='product-info'>MSRP: ${product.fullprice}.00</h2>
                     <h2 className='product-info'>Our Price: ${product.saleprice}.00</h2>
                     <p className='product-info'>Description: {product.description}</p>
-                    <div hidden={this.state.alreadyInCart}>
+                    <div>
                         <Link to='/cart'>
                             <button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>
                                 I want it!
@@ -65,11 +47,6 @@ class Electronics extends Component {
                         </Link>
                     </div>
 
-                    <div hidden={!this.state.alreadyInCart}>
-                        <button disabled={false} className='add-to-cart-button-disabled'>
-                            Limit 1 Per Customer
-                        </button>
-                    </div>
 
 
                     <p className='product-info'>Remaining: {product.quantity}</p>
