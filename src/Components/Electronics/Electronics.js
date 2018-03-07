@@ -25,7 +25,7 @@ class Electronics extends Component {
         this.props.cart.map( e => {
             if(!product){
                 return;
-            } else if(e.productid == product.productid){
+            } else if(e.productname == product.productname){
                 this.setState({
                     alreadyInCart: true
                 }) 
