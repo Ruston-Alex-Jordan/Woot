@@ -50,7 +50,8 @@ class Cart extends Component {
         let totalCart;
         if(this.props.cart.length > 1){ 
             totalCart = this.props.cart.map( (e, i, arry) => {
-            return e.saleprice + arry[i + 1].saleprice
+            return 
+            // e.saleprice + arry[i + 1].saleprice
          }) } else if(this.props.cart.length === 1) {
             totalCart = this.props.cart[0].saleprice
          } else if(!this.props.cart) { console.log('i am empty')} 

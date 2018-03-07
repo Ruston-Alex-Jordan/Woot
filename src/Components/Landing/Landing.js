@@ -22,14 +22,23 @@ class Landing extends Component {
     }
 
     render() { 
-        // console.log(this.props)
+        console.log(this.state.alreadyInCart) 
         let product = this.props.hourlyProduct[new Date().getHours()];
+        // let alreadyInCart = this.props.cart.map( (e) => {
+        //     if(e.id == product.productid) {
+        //         return false
+        //     } else {
+        //         return true
+        //     }
+        // })
+
+        // console.log(alreadyInCart)
+
         if(!product){
             return <img className='loading-image' alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
         }
-        // console.log(this.state.timeUp)
         
-        console.log(this.props.cart)
+        // console.log(this.props.cart)
         return (
             <div>
                 <div className='todays-woot'>Todays Woot</div>
@@ -42,18 +51,13 @@ class Landing extends Component {
                         <h2 className='product-info'>MSRP: ${product.fullprice}.00</h2>
                         <h2 className='product-info'>Our Price: ${product.saleprice}.00</h2>
                         <p className='product-info'>Description: {product.description}</p>
-                        <div hidden={this.props.cart.length}>
+
+                        <div>
                             <Link to='/cart'>
                                 <button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>
                                     I want it!
                                 </button>
                             </Link>
-                        </div>
-
-                        <div hidden={!this.props.cart.length}>
-                            <button disabled={false} className='add-to-cart-button-disabled'>
-                                Limit 1 Per Customer
-                            </button>
                         </div>
 
 
