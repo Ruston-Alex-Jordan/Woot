@@ -24,15 +24,7 @@ class Landing extends Component {
     render() { 
         console.log(this.state.alreadyInCart) 
         let product = this.props.hourlyProduct[new Date().getHours()];
-        // let alreadyInCart = this.props.cart.map( (e) => {
-        //     if(e.id == product.productid) {
-        //         return false
-        //     } else {
-        //         return true
-        //     }
-        // })
 
-        // console.log(alreadyInCart)
 
         if(!product){
             return <img className='loading-image' alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
