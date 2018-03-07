@@ -22,7 +22,6 @@ class Landing extends Component {
     }
 
     render() { 
-        console.log(this.state.alreadyInCart) 
         let product = this.props.hourlyProduct[new Date().getHours()];
 
 
