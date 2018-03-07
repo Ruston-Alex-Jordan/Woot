@@ -5,14 +5,42 @@ import {bindActionCreators} from 'redux';
 import { getHourlyElectronicsProduct, addToCart} from '../.././ducks/reducer';
 import ReactCountdownClock from 'react-countdown-clock';
 import { Link } from 'react-router-dom';
-
 import {getTimeRemaining} from '../../Util/Util';
-import './Electronics.css';
 
 class Electronics extends Component {
-    render() {
+    constructor(){
+        super();
+        this.state = {
+            timeUp: false,
+            alreadyInCart: false
+        }
+    }
 
-    let product = this.props.getHourlyElectronicsProduct[new Date().getHours()];
+    componentWillMount(){
+        this.props.getHourlyElectronicsProduct()
+    }
+
+    componentDidMount(){
+        let product = this.props.hourlyElectronicsProduct[new Date().getHours()];
+        this.props.cart.map( e => {
+            if(!product){
+                return;
+            } else if(e.productid == product.productid){
+                this.setState({
+                    alreadyInCart: true
+                }) 
+            } else {
+                this.setState({
+                    alreadyInCart: false
+                })
+
+            }
+        })
+    }
+    render() {
+        console.log(this.props.hourlyElectronicsProduct, 'laksdjfdas')
+
+    let product = this.props.hourlyElectronicsProduct[new Date().getHours()];
     if(!product){
         return <img className='loading-image' alt='loading' src='http://datainflow.com/wp-content/uploads/2017/09/loader.gif' />
     }
@@ -29,7 +57,7 @@ class Electronics extends Component {
                     <h2 className='product-info'>MSRP: ${product.fullprice}.00</h2>
                     <h2 className='product-info'>Our Price: ${product.saleprice}.00</h2>
                     <p className='product-info'>Description: {product.description}</p>
-                    <div hidden={this.props.cart.length}>
+                    <div hidden={this.state.alreadyInCart}>
                         <Link to='/cart'>
                             <button onClick={(id) => this.props.addToCart(product)} className='add-to-cart-button'>
                                 I want it!
@@ -37,7 +65,7 @@ class Electronics extends Component {
                         </Link>
                     </div>
 
-                    <div hidden={!this.props.cart.length}>
+                    <div hidden={!this.state.alreadyInCart}>
                         <button disabled={false} className='add-to-cart-button-disabled'>
                             Limit 1 Per Customer
                         </button>
