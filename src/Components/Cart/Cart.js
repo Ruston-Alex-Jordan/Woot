@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactCountdownClock from 'react-countdown-clock';
 import StripeCheckout from 'react-stripe-checkout';
@@ -26,6 +26,7 @@ class Cart extends Component {
         axios.post('http://localhost:8000/order-complete', config).then( res => {
         })
     }
+
     render() {
         let cartItems = this.props.cart.map( e => {
             // console.log(e)
@@ -33,7 +34,7 @@ class Cart extends Component {
             return (
             <div className='cart-item' key={e.productid}>
                 <div>
-                    <img className='cart-image' src={e.imgurl} />
+                    <img alt='product' className='cart-image' src={e.imgurl} />
                 </div>
                 <div>
                     <div className='cart-product-name'> {e.productname}  </div>
@@ -47,15 +48,20 @@ class Cart extends Component {
             </div>
             )
         });
-        let totalCart;
-        if(this.props.cart.length > 1){ 
-            totalCart = this.props.cart.map( (e, i, arry) => {
-            return 
-            // e.saleprice + arry[i + 1].saleprice
-         }) } else if(this.props.cart.length === 1) {
-            totalCart = this.props.cart[0].saleprice
-         } else if(!this.props.cart) { console.log('i am empty')} 
 
+        let totalCart = 0;
+
+        if(this.props.cart.length > 1){ 
+            console.log(this.props.cart)
+            for(let i = 0; i < this.props.cart.length; i++){
+                totalCart += this.props.cart[i].saleprice
+            }
+        } else if(this.props.cart.length === 1) {
+            totalCart = this.props.cart[0].saleprice
+        } else if(!this.props.cart) { 
+            totalCart = 0
+        } 
+        console.log(totalCart)
         return (
             <div>
                 <div className='main-container-cart'>
@@ -79,7 +85,7 @@ class Cart extends Component {
                                     timeFormat={'hms'}
                                 />
                             </div>
-                            <div className='right-content-subtotal'>Subtotal: </div>
+                            <div className='right-content-subtotal'>Subtotal: ${totalCart}.00</div>
                         </div>
 
                         <div hidden={!this.props.cart.length} className='stripe-checkout'>
@@ -99,7 +105,7 @@ class Cart extends Component {
                     
                 </div>
                 <div className='advertisements'>
-                    <img src='https://d3gqasl9vmjfd8.cloudfront.net/9431cc33-13b2-4009-a1ef-eeac94dc6d2d.jpg' />
+                    <img src='https://d3gqasl9vmjfd8.cloudfront.net/9431cc33-13b2-4009-a1ef-eeac94dc6d2d.jpg' alt='advertisement' />
                 </div>
             </div>
         );

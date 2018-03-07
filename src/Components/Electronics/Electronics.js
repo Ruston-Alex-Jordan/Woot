@@ -68,7 +68,7 @@ class Electronics extends Component {
             </div>
 
             <div className='advertisements'>
-                <img src='https://d3gqasl9vmjfd8.cloudfront.net/9431cc33-13b2-4009-a1ef-eeac94dc6d2d.jpg' />
+                <img alt='electronic product' src='https://d3gqasl9vmjfd8.cloudfront.net/9431cc33-13b2-4009-a1ef-eeac94dc6d2d.jpg' />
             </div>
 
         </div>
