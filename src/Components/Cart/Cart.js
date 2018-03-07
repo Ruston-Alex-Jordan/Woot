@@ -8,6 +8,8 @@ import {bindActionCreators} from 'redux';
 import {checkoutCart} from '../.././ducks/reducer';
 import axios from 'axios';  
 
+import _ from 'lodash';
+
 import './Cart.css';
 
 class Cart extends Component {
@@ -28,7 +30,12 @@ class Cart extends Component {
     }
 
     render() {
-        let cartItems = this.props.cart.map( e => {
+        let arr = this.props.cart
+        let uniqueItemsInCart = _.uniqBy(arr, 'productname')
+
+        console.log(uniqueItemsInCart)
+
+        let cartItems = uniqueItemsInCart.map( e => {
             // console.log(e)
             let percentageOff = (1 - (e.saleprice / e.fullprice)) * 100;
             return (
@@ -44,6 +51,8 @@ class Cart extends Component {
                         <div className='cart-product-discount'>{Number(percentageOff).toFixed(2)}% off list price</div>
                     </div>
                     <div>Ships in 3-5 business days.</div>
+                    <div>Quantity</div>
+                    <div>Total: </div>
                 </div> 
             </div>
             )
@@ -52,7 +61,7 @@ class Cart extends Component {
         let totalCart = 0;
 
         if(this.props.cart.length > 1){ 
-            console.log(this.props.cart)
+            // console.log(this.props.cart)
             for(let i = 0; i < this.props.cart.length; i++){
                 totalCart += this.props.cart[i].saleprice
             }
@@ -61,7 +70,7 @@ class Cart extends Component {
         } else if(!this.props.cart) { 
             totalCart = 0
         } 
-        console.log(totalCart)
+        // console.log(totalCart)
         return (
             <div>
                 <div className='main-container-cart'>
