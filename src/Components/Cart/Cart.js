@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactCountdownClock from 'react-countdown-clock';
 import StripeCheckout from 'react-stripe-checkout';
-import {getTimeRemaining} from '../../Util/Util';
+import {getTimeRemaining, timerComplete} from '../../Util/Util';
 import {bindActionCreators} from 'redux';
 import {checkoutCart} from '../.././ducks/reducer';
 import axios from 'axios';  
@@ -18,10 +18,10 @@ class Cart extends Component {
         
         this.state = {
             uniqueItemsInCart: [],
-            wholeCart: []
         }
 
-    this.onToken = this.onToken.bind(this)
+        this.onToken = this.onToken.bind(this);
+
     }
 
     onToken(token){
@@ -34,20 +34,37 @@ class Cart extends Component {
         })
     }
 
+    // return a new array that is the unique cart items with a new quantity value
+
+    calculateCart(cart) {
+        let retArray = []
+        cart.forEach( (e) => {
+            // "_.find" takes in the collection, and condition
+            // returns the first thing that meets that condition or null
+            let search = _.find(retArray, (p) => { return p.productname == e.productname })
+            if(!search) {
+                e.quantity = 1
+                retArray.push(e)
+            } else {
+                search.quantity++
+            }
+        })
+        return retArray; // return unique items, with correct quantity in cart
+    }
+
     componentDidMount() {
         this.setState({
-            uniqueItemsInCart: _.uniqBy(this.props.cart, 'productname'),
-            wholeCart: this.props.cart
+            // uniqueItemsInCart: _.uniqBy(this.props.cart, 'productname'),
+            uniqueItemsInCart: this.calculateCart(this.props.cart),
+            // wholeCart: this.props.cart
         })
     }
 
     render() {
-        // let uniqueItemsInCart = _.uniqBy(this.props.cart, 'productname')
 
         let totalCart = 0;
 
-        if(this.props.cart.length > 1){ 
-            // console.log(this.props.cart)
+        if(this.props.cart.length > 1){
             for(let i = 0; i < this.props.cart.length; i++){
                 totalCart += this.props.cart[i].saleprice
             }
@@ -63,21 +80,14 @@ class Cart extends Component {
             // console.log(e)
             let percentageOff = (1 - (e.saleprice / e.fullprice)) * 100;
         
-            let cartItemQuantity = [];
+            // let cartItemQuantity = 0;
 
-
-            for(let index = 0; index <= this.state.wholeCart.length; index++){
-                console.log(this.state.wholeCart[index])
-                if(this.state.wholeCart[index]) {
-
-                    if(e.productname === this.state.wholeCart[index].productname){
-                        cartItemQuantity.push('a')
-                        console.log(cartItemQuantity)
-                    }
-                }
-            }
+            // for(let index = 0; index < this.state.wholeCart.length; index++){
+            //     if(e.productname === this.state.wholeCart[index].productname){
+            //         cartItemQuantity++
+            //     }
+            // }
             
-
             return (
                 <div className='cart-item' key={i}>
                     <div>
@@ -91,14 +101,13 @@ class Cart extends Component {
                             <div className='cart-product-discount'>{Number(percentageOff).toFixed(2)}% off list price</div>
                         </div>
                         <div>Ships in 3-5 business days.</div>
-                        <div>Quantity: {cartItemQuantity.length}</div>
-                        <div>Total: ${cartItemQuantity.length * e.saleprice}.00</div>
+                        <div>Quantity: {e.quantity}</div>
+                        <div>Total: ${e.quantity * e.saleprice}.00</div>
                     </div> 
                 </div>
             )
         });
-
-        // console.log(totalCart)
+        
         return (
             <div>
                 <div className='main-container-cart'>
@@ -120,6 +129,7 @@ class Cart extends Component {
                                     alpha={0.9}
                                     size={100}
                                     timeFormat={'hms'}
+                                    onComplete={timerComplete}
                                 />
                             </div>
                             <div className='right-content-subtotal'>Subtotal: ${totalCart}.00</div>
