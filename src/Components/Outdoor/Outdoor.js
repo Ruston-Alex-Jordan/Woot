@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import { getHourlyOutdoorProduct, addToCart} from '../.././ducks/reducer';
 import ReactCountdownClock from 'react-countdown-clock';
 import { Link } from 'react-router-dom';
-import {getTimeRemaining} from '../../Util/Util';
+import {getTimeRemaining, timerComplete} from '../../Util/Util';
 
 import './Outdoor.css';
 
@@ -56,6 +56,7 @@ class Outdoor extends Component {
                                     alpha={0.9}
                                     size={100}
                                     timeFormat={'hms'}
+                                    onComplete={timerComplete}
                                 />
                             </div>
                         </div>

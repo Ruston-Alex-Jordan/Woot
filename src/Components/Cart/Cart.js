@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactCountdownClock from 'react-countdown-clock';
 import StripeCheckout from 'react-stripe-checkout';
-import {getTimeRemaining} from '../../Util/Util';
+import {getTimeRemaining, timerComplete} from '../../Util/Util';
 import {bindActionCreators} from 'redux';
 import {checkoutCart} from '../.././ducks/reducer';
 import axios from 'axios';  
@@ -21,7 +21,8 @@ class Cart extends Component {
             wholeCart: []
         }
 
-    this.onToken = this.onToken.bind(this)
+        this.onToken = this.onToken.bind(this);
+
     }
 
     onToken(token){
@@ -67,12 +68,12 @@ class Cart extends Component {
 
 
             for(let index = 0; index <= this.state.wholeCart.length; index++){
-                console.log(this.state.wholeCart[index])
+                // console.log(this.state.wholeCart[index])
                 if(this.state.wholeCart[index]) {
 
                     if(e.productname === this.state.wholeCart[index].productname){
                         cartItemQuantity.push('a')
-                        console.log(cartItemQuantity)
+                        // console.log(cartItemQuantity)
                     }
                 }
             }
@@ -120,6 +121,7 @@ class Cart extends Component {
                                     alpha={0.9}
                                     size={100}
                                     timeFormat={'hms'}
+                                    onComplete={timerComplete}
                                 />
                             </div>
                             <div className='right-content-subtotal'>Subtotal: ${totalCart}.00</div>

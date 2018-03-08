@@ -9,3 +9,7 @@ export function getTimeRemaining() {
     return secondsRemaining;
 }
 
+
+export function timerComplete() {
+    window.location.reload();
+}
