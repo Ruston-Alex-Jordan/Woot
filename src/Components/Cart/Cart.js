@@ -15,6 +15,11 @@ import './Cart.css';
 class Cart extends Component {
     constructor(props){
         super(props)
+        
+        this.state = {
+            uniqueItemsInCart: [],
+            wholeCart: []
+        }
 
     this.onToken = this.onToken.bind(this)
     }
@@ -29,34 +34,15 @@ class Cart extends Component {
         })
     }
 
+    componentDidMount() {
+        this.setState({
+            uniqueItemsInCart: _.uniqBy(this.props.cart, 'productname'),
+            wholeCart: this.props.cart
+        })
+    }
+
     render() {
-        let arr = this.props.cart
-        let uniqueItemsInCart = _.uniqBy(arr, 'productname')
-
-        console.log(uniqueItemsInCart)
-
-        let cartItems = uniqueItemsInCart.map( e => {
-            // console.log(e)
-            let percentageOff = (1 - (e.saleprice / e.fullprice)) * 100;
-            return (
-            <div className='cart-item' key={e.productid}>
-                <div>
-                    <img alt='product' className='cart-image' src={e.imgurl} />
-                </div>
-                <div>
-                    <div className='cart-product-name'> {e.productname}  </div>
-                    <div className='cart-price-container'>
-                        <div className='cart-product-price'>${e.saleprice}.00</div>
-                        <div className='cart-product-fullprice'>${e.fullprice}.00 </div>
-                        <div className='cart-product-discount'>{Number(percentageOff).toFixed(2)}% off list price</div>
-                    </div>
-                    <div>Ships in 3-5 business days.</div>
-                    <div>Quantity</div>
-                    <div>Total: </div>
-                </div> 
-            </div>
-            )
-        });
+        // let uniqueItemsInCart = _.uniqBy(this.props.cart, 'productname')
 
         let totalCart = 0;
 
@@ -70,6 +56,48 @@ class Cart extends Component {
         } else if(!this.props.cart) { 
             totalCart = 0
         } 
+
+
+
+        let cartItems = this.state.uniqueItemsInCart.map( (e, i) => {
+            // console.log(e)
+            let percentageOff = (1 - (e.saleprice / e.fullprice)) * 100;
+        
+            let cartItemQuantity = [];
+
+
+            for(let index = 0; index <= this.state.wholeCart.length; index++){
+                console.log(this.state.wholeCart[index])
+                if(this.state.wholeCart[index]) {
+
+                    if(e.productname === this.state.wholeCart[index].productname){
+                        cartItemQuantity.push('a')
+                        console.log(cartItemQuantity)
+                    }
+                }
+            }
+            
+
+            return (
+                <div className='cart-item' key={i}>
+                    <div>
+                        <img alt='product' className='cart-image' src={e.imgurl} />
+                    </div>
+                    <div>
+                        <div className='cart-product-name'> {e.productname}  </div>
+                        <div className='cart-price-container'>
+                            <div className='cart-product-price'>${e.saleprice}.00</div>
+                            <div className='cart-product-fullprice'>${e.fullprice}.00 </div>
+                            <div className='cart-product-discount'>{Number(percentageOff).toFixed(2)}% off list price</div>
+                        </div>
+                        <div>Ships in 3-5 business days.</div>
+                        <div>Quantity: {cartItemQuantity.length}</div>
+                        <div>Total: ${cartItemQuantity.length * e.saleprice}.00</div>
+                    </div> 
+                </div>
+            )
+        });
+
         // console.log(totalCart)
         return (
             <div>
