@@ -64,17 +64,11 @@ class Cart extends Component {
             // console.log(e)
             let percentageOff = (1 - (e.saleprice / e.fullprice)) * 100;
         
-            let cartItemQuantity = [];
+            let cartItemQuantity = 0;
 
-
-            for(let index = 0; index <= this.state.wholeCart.length; index++){
-                // console.log(this.state.wholeCart[index])
-                if(this.state.wholeCart[index]) {
-
-                    if(e.productname === this.state.wholeCart[index].productname){
-                        cartItemQuantity.push('a')
-                        // console.log(cartItemQuantity)
-                    }
+            for(let index = 0; index < this.state.wholeCart.length; index++){
+                if(e.productname === this.state.wholeCart[index].productname){
+                    cartItemQuantity++
                 }
             }
             
@@ -92,8 +86,8 @@ class Cart extends Component {
                             <div className='cart-product-discount'>{Number(percentageOff).toFixed(2)}% off list price</div>
                         </div>
                         <div>Ships in 3-5 business days.</div>
-                        <div>Quantity: {cartItemQuantity.length}</div>
-                        <div>Total: ${cartItemQuantity.length * e.saleprice}.00</div>
+                        <div>Quantity: {cartItemQuantity}</div>
+                        <div>Total: ${cartItemQuantity * e.saleprice}.00</div>
                     </div> 
                 </div>
             )
